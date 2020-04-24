@@ -7,3 +7,25 @@
 //
 
 import Foundation
+import UIKit
+
+class CategoryCell: UICollectionViewCell {
+    
+    var data: Category? {
+        didSet {
+            guard let data = data else { return }
+            title.text = data.title
+        }
+    }
+    
+    let title: UILabel = {
+        let title = UILabel()
+        title.translatesAutoresizingMaskIntoConstraints = false
+        title.textColor = .white
+        title.font = K.headingFont
+        title.textAlignment = .center
+        title.text = "testing"
+        return title
+    }()
+    
+}
