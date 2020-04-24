@@ -12,3 +12,7 @@ import UIKit
 struct Category {
     var title: String
 }
+
+struct Article{
+    var title: String
+}
