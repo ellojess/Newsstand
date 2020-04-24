@@ -37,7 +37,6 @@ class CategoriesViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
@@ -54,7 +53,7 @@ extension CategoriesViewController: UICollectionViewDelegateFlowLayout, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        50
+        10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -65,6 +64,8 @@ extension CategoriesViewController: UICollectionViewDelegateFlowLayout, UICollec
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("selected item in row \(indexPath.row)")
+        let nextView: ArticlesListViewController = ArticlesListViewController()
+        self.navigationController?.pushViewController(nextView, animated: true)
     }
     
 }
