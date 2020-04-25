@@ -11,6 +11,18 @@ import UIKit
 
 class CategoriesViewController: UIViewController {
     
+    let data = [
+        
+        Category(title: "business"),
+        Category(title: "entertainment"),
+        Category(title: "health"),
+        Category(title: "science"),
+        Category(title: "technology"),
+        Category(title: "sports"),
+        Category(title: "general")
+    
+    ]
+    
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 30
@@ -53,12 +65,13 @@ extension CategoriesViewController: UICollectionViewDelegateFlowLayout, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        return data.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CategoryCell
         cell.backgroundColor = .green
+        cell.data = self.data[indexPath.row]
         return cell
     }
     
