@@ -13,7 +13,7 @@ class ArticlesListViewController: UIViewController{
     
     let tableView = UITableView()
     let topArticlesURL = ""
-    let APIKey = APIKey
+    let APIKey = secretKey
     
     let dummyData = [
         Article(title: "One"),
