@@ -12,13 +12,14 @@ import UIKit
 class ArticlesListViewController: UIViewController{
     
     let tableView = UITableView()
+    let topArticlesURL = ""
+    let APIKey = APIKey
     
     let dummyData = [
         Article(title: "One"),
         Article(title: "Two"),
         Article(title: "Three")
     ]
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +40,27 @@ class ArticlesListViewController: UIViewController{
         tableView.delegate = self
         tableView.dataSource = self
     }
+    
+    
+    func fetchTopArticles() {
+
+          // Configure a .default session
+          let defaultSession = URLSession(configuration: .default)
+
+          // Create URL
+          let url = URL(string: "https://<your_target_web_service>")
+
+          // Create Request
+          let request = URLRequest(url: url!)
+
+          // Create Data Task
+          let dataTask = defaultSession.dataTask(with: request, completionHandler: { (data, response, error) -> Void in
+
+            // handle Response Here
+
+          })
+          dataTask.resume() // Start the data task
+      }
     
 }
 
