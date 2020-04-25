@@ -11,7 +11,13 @@ import UIKit
 
 class ArticlesListViewController: UIViewController{
     
-    let tableView = UITableView() 
+    let tableView = UITableView()
+    
+    let dummyData = [
+        Article(title: "One"),
+        Article(title: "Two"),
+        Article(title: "Three")
+    ]
     
     
     override func viewDidLoad() {
@@ -39,12 +45,13 @@ class ArticlesListViewController: UIViewController{
 
 extension ArticlesListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        return dummyData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ArticleCell
         cell.backgroundColor = .blue
+        cell.data = self.dummyData[indexPath.row]
         return cell
     }
     
@@ -55,20 +62,8 @@ extension ArticlesListViewController: UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("selected item in row \(indexPath.row)")
         let nextView: DetailViewController = DetailViewController()
+        nextView.title = self.dummyData[indexPath.row].title
         self.navigationController?.pushViewController(nextView, animated: true)
     }
     
 }
-
-
-//func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CategoryCell
-//    cell.backgroundColor = .green
-//    return cell
-//}
-//
-//func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//    print("selected item in row \(indexPath.row)")
-//    let nextView: ArticlesListViewController = ArticlesListViewController()
-//    self.navigationController?.pushViewController(nextView, animated: true)
-//}
