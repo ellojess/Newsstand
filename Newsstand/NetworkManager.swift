@@ -21,9 +21,9 @@ class NetworkManager {
     func getArticles(_ completion: @escaping (Result<[Article]>) -> Void) {
         let articlesRequest = makeRequest(for: .articles)
         print("\(articlesRequest)")
-//        let task = urlSession.dataTask(with: articlesRequest) { data, response, error in
-        let url = URL(string: "\(baseURL)top-headlines?country=us&apiKey=\(secretKey)")
-        let task = urlSession.dataTask(with: url!, completionHandler: { data, response, error in
+        let task = urlSession.dataTask(with: articlesRequest) { data, response, error in
+//        let url = URL(string: "\(baseURL)top-headlines?country=us&apiKey=\(secretKey)")
+//        let task = urlSession.dataTask(with: url!, completionHandler: { data, response, error in
             // Check for errors.
             if let error = error {
                 return completion(Result.failure(error))
@@ -46,7 +46,7 @@ class NetworkManager {
             DispatchQueue.main.async {
                 completion(Result.success(articles))
             }
-        })
+        }
 
         task.resume()
     }
@@ -90,7 +90,7 @@ class NetworkManager {
             return [
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "authorization": "X-Api-Key \(secretKey)",
+                "Authorization": "X-Api-Key \(secretKey)",
                 "Host": "newsapi.org"
             ]
         }
@@ -100,8 +100,8 @@ class NetworkManager {
             switch self {
             case .articles:
                 return [
-                    "country": "hk",
-                    "category": "entertainment"
+                    "country": "us",
+//                    "category": "entertainment"
 //                    "category": "category"
                 ]
                 

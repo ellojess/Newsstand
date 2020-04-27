@@ -39,12 +39,12 @@ class ArticlesListViewController: UIViewController{
     
     func updateArticles() {
         networkManager.getArticles() { result in
-//            switch result {
-//            case let .success(articles):
-//                self.articles = articles
-//            case let .failure(error):
-//                print(error)
-//            }
+            switch result {
+            case let .success(articles):
+                self.articles = articles
+            case let .failure(error):
+                print(error)
+            }
             print(result)
         }
     }
