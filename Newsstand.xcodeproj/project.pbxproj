@@ -14,8 +14,8 @@
 		C0394F602452C72A0034E37B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0394F5F2452C72A0034E37B /* DetailViewController.swift */; };
 		C0394F62245374920034E37B /* ArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0394F61245374920034E37B /* ArticleCell.swift */; };
 		C0394F662453E32B0034E37B /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0394F652453E32B0034E37B /* Keys.swift */; };
-		C0394F682453E4260034E37B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0394F672453E4260034E37B /* NetworkManager.swift */; };
 		C0394F6A2454C5020034E37B /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0394F692454C5020034E37B /* Article.swift */; };
+		C03EC8362457672A00BF012F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03EC8352457672A00BF012F /* NetworkManager.swift */; };
 		C081418D24510FAB009F76C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081418C24510FAB009F76C2 /* AppDelegate.swift */; };
 		C081418F24510FAB009F76C2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081418E24510FAB009F76C2 /* SceneDelegate.swift */; };
 		C081419624510FAD009F76C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C081419524510FAD009F76C2 /* Assets.xcassets */; };
@@ -31,8 +31,8 @@
 		C0394F5F2452C72A0034E37B /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		C0394F61245374920034E37B /* ArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCell.swift; sourceTree = "<group>"; };
 		C0394F652453E32B0034E37B /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Keys.swift; path = " Model/Keys.swift"; sourceTree = "<group>"; };
-		C0394F672453E4260034E37B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C0394F692454C5020034E37B /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		C03EC8352457672A00BF012F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C081418924510FAB009F76C2 /* Newsstand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Newsstand.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C081418C24510FAB009F76C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C081418E24510FAB009F76C2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,7 +78,6 @@
 				C08141A0245295CB009F76C2 /* CategoriesViewController.swift */,
 				C0394F5D2452C70A0034E37B /* ArticlesListViewController.swift */,
 				C0394F5F2452C72A0034E37B /* DetailViewController.swift */,
-				C0394F672453E4260034E37B /* NetworkManager.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -111,6 +110,7 @@
 				C081419524510FAD009F76C2 /* Assets.xcassets */,
 				C081419724510FAD009F76C2 /* LaunchScreen.storyboard */,
 				C081419A24510FAD009F76C2 /* Info.plist */,
+				C03EC8352457672A00BF012F /* NetworkManager.swift */,
 			);
 			path = Newsstand;
 			sourceTree = "<group>";
@@ -185,12 +185,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C03EC8362457672A00BF012F /* NetworkManager.swift in Sources */,
 				C081418D24510FAB009F76C2 /* AppDelegate.swift in Sources */,
 				C0394F5E2452C70A0034E37B /* ArticlesListViewController.swift in Sources */,
 				C08141A1245295CB009F76C2 /* CategoriesViewController.swift in Sources */,
 				C081418F24510FAB009F76C2 /* SceneDelegate.swift in Sources */,
 				C0394F6A2454C5020034E37B /* Article.swift in Sources */,
-				C0394F682453E4260034E37B /* NetworkManager.swift in Sources */,
 				C0394F582452AD3C0034E37B /* Category.swift in Sources */,
 				C0394F62245374920034E37B /* ArticleCell.swift in Sources */,
 				C0394F5A2452AE6A0034E37B /* CategoryCell.swift in Sources */,

@@ -2,7 +2,7 @@
 //  NetworkManager.swift
 //  Newsstand
 //
-//  Created by Bo on 4/24/20.
+//  Created by Bo on 4/27/20.
 //  Copyright © 2020 Jessica Trinh. All rights reserved.
 //
 
@@ -20,32 +20,37 @@ class NetworkManager {
     
     func getArticles(_ completion: @escaping (Result<[Article]>) -> Void) {
         let articlesRequest = makeRequest(for: .articles)
-        let task = urlSession.dataTask(with: articlesRequest) { data, response, error in
+        print("\(articlesRequest)")
+//        let task = urlSession.dataTask(with: articlesRequest) { data, response, error in
+        let url = URL(string: "\(baseURL)top-headlines?country=us&apiKey=\(secretKey)")
+        let task = urlSession.dataTask(with: url!, completionHandler: { data, response, error in
             // Check for errors.
             if let error = error {
                 return completion(Result.failure(error))
             }
-            
+
             // Check to see if there is any data that was retrieved.
             guard let data = data else {
                 return completion(Result.failure(EndPointError.noData))
             }
-            
+
             // Attempt to decode the data.
             guard let result = try? JSONDecoder().decode(ArticleList.self, from: data) else {
+
                 return completion(Result.failure(EndPointError.couldNotParse))
             }
-            
-            let articles = result.results
-            
+
+            let articles = result.articles
+
             // Return the result with the completion handler.
             DispatchQueue.main.async {
                 completion(Result.success(articles))
             }
-        }
-        
+        })
+
         task.resume()
     }
+    
     
     
     
@@ -60,7 +65,7 @@ class NetworkManager {
         var request = URLRequest(url: fullURL)
         request.httpMethod = endPoint.getHTTPMethod()
         request.allHTTPHeaderFields = endPoint.getHeaders(secretKey: secretKey)
-        
+        print("\(request.allHTTPHeaderFields)")
         return request
     }
     
@@ -85,7 +90,7 @@ class NetworkManager {
             return [
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": "Bearer \(secretKey)",
+                "authorization": "X-Api-Key \(secretKey)",
                 "Host": "newsapi.org"
             ]
         }
