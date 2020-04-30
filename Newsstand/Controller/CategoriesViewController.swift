@@ -23,6 +23,7 @@ class CategoriesViewController: UIViewController {
     
     ]
     
+    
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 30
@@ -77,8 +78,19 @@ extension CategoriesViewController: UICollectionViewDelegateFlowLayout, UICollec
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("selected item in row \(indexPath.row)")
-        let nextView: ArticlesListViewController = ArticlesListViewController()
-        self.navigationController?.pushViewController(nextView, animated: true)
+        
+        NetworkManager.shared.getArticles(category: "\(data[indexPath.row])") { result in
+            switch result {
+            case .success(_):
+                let nextView: ArticlesListViewController = ArticlesListViewController()
+//                nextView.articles = ArticleList.articles
+                self.navigationController?.pushViewController(nextView, animated: true)
+            case .failure(_):
+                print(Error.self)
+            }
+        
+        }
+    
     }
     
 }

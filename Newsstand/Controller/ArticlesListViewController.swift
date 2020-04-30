@@ -15,6 +15,8 @@ class ArticlesListViewController: UIViewController{
     
 //    let articles: [Article] = []
     
+    var category: String! = nil
+    
     let networkManager = NetworkManager()
     
     var articles: [Article] = [] {
@@ -34,20 +36,21 @@ class ArticlesListViewController: UIViewController{
         self.view.backgroundColor = .yellow
         setUpTableView()
         tableView.register(ArticleCell.self, forCellReuseIdentifier: "cell")
-        updateArticles()
+//        updateArticles()
     }
-    
-    func updateArticles() {
-        networkManager.getArticles() { result in
-            switch result {
-            case let .success(articles):
-                self.articles = articles
-            case let .failure(error):
-                print(error)
-            }
-            print(result)
-        }
-    }
+  
+// should fetch articles from API
+//    func updateArticles() {
+//        networkManager.getArticles(category: category!) { result in
+//            switch result {
+//            case let .success(articles):
+//                self.articles = articles
+//            case let .failure(error):
+//                print(error)
+//            }
+//            print(result)
+//        }
+//    }
     
     func setUpTableView(){
         view.addSubview(tableView)

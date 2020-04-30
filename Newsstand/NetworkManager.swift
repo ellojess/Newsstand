@@ -12,14 +12,16 @@ import UIKit
 
 class NetworkManager {
     
+    public static let shared = NetworkManager() 
+    
     let urlSession = URLSession.shared
     let topArticlesURL = "https://newsapi.org/v2/top-headlines?country=us&apiKey=\(secretKey)"
     let baseURL = "https://newsapi.org/v2/"
     let APIKey = secretKey
     
     
-    func getArticles(_ completion: @escaping (Result<[Article]>) -> Void) {
-        let articlesRequest = makeRequest(for: .articles)
+    func getArticles(category: String, _ completion: @escaping (Result<[Article]>) -> Void) {
+        let articlesRequest = makeRequest(for: .category)
         print("\(articlesRequest)")
         let task = urlSession.dataTask(with: articlesRequest) { data, response, error in
 //        let url = URL(string: "\(baseURL)top-headlines?country=us&apiKey=\(secretKey)")
@@ -71,11 +73,12 @@ class NetworkManager {
     
     enum EndPoints {
         case articles
+        case category
         
         // determine which path to provide for the API request
         func getPath() -> String {
             switch self {
-            case .articles:
+            case .articles, .category:
                 return "top-headlines"
             }
         }
@@ -105,6 +108,9 @@ class NetworkManager {
 //                    "category": "category"
                 ]
                 
+            case .category:
+                return ["country" : "us"
+                ]
             }
         }
         
