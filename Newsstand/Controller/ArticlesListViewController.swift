@@ -31,7 +31,6 @@ class ArticlesListViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .yellow
         setUpTableView()
         tableView.register(ArticleCell.self, forCellReuseIdentifier: "cell")
         updateArticles()
@@ -72,7 +71,6 @@ extension ArticlesListViewController: UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ArticleCell
-        cell.backgroundColor = .blue
 //        cell.data = self.dummyData[indexPath.row]
         
         // retrieve from actual articles, and not mock data

@@ -32,8 +32,8 @@ class ArticleCell: UITableViewCell {
         title.translatesAutoresizingMaskIntoConstraints = false
         title.textColor = .black
         title.font = K.titleFont
-        title.textAlignment = .center
-        title.text = "testing Article"
+        title.lineBreakMode = .byWordWrapping
+        title.numberOfLines = 0
         return title
     }()
     
