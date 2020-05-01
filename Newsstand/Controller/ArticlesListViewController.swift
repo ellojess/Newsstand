@@ -92,6 +92,7 @@ extension ArticlesListViewController: UITableViewDataSource, UITableViewDelegate
         print("selected item in row \(indexPath.row)")
         let nextView: DetailViewController = DetailViewController()
 //        nextView.title = self.dummyData[indexPath.row].title
+        nextView.url = articles[indexPath.row].url
         nextView.title = self.articles[indexPath.row].title
         self.navigationController?.pushViewController(nextView, animated: true)
     }
