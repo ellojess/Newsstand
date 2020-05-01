@@ -33,7 +33,6 @@ class CategoryCell: UICollectionViewCell {
         title.textColor = .white
         title.font = K.headingFont
         title.textAlignment = .center
-        title.text = "testing Category"
         return title
     }()
     

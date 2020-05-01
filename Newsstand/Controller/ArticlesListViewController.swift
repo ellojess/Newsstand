@@ -17,6 +17,8 @@ class ArticlesListViewController: UIViewController{
     
     let networkManager = NetworkManager()
     
+    var category: String? = nil 
+    
     var articles: [Article] = [] {
         didSet {
             tableView.reloadData()
@@ -33,20 +35,20 @@ class ArticlesListViewController: UIViewController{
         super.viewDidLoad()
         setUpTableView()
         tableView.register(ArticleCell.self, forCellReuseIdentifier: "cell")
-        updateArticles()
+//        updateArticles()
     }
     
-    func updateArticles() {
-        networkManager.getArticles() { result in
-            switch result {
-            case let .success(articles):
-                self.articles = articles
-            case let .failure(error):
-                print(error)
-            }
-            print(result)
-        }
-    }
+//    func updateArticles() {
+//        networkManager.getArticles(category: ) { result in
+//            switch result {
+//            case let .success(articles):
+//                self.articles = articles
+//            case let .failure(error):
+//                print(error)
+//            }
+//            print(result)
+//        }
+//    }
     
     func setUpTableView(){
         view.addSubview(tableView)

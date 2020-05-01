@@ -11,17 +11,7 @@ import UIKit
 
 class CategoriesViewController: UIViewController {
     
-    let data = [
-        
-        Category(title: "business"),
-        Category(title: "entertainment"),
-        Category(title: "health"),
-        Category(title: "science"),
-        Category(title: "technology"),
-        Category(title: "sports"),
-        Category(title: "general")
-    
-    ]
+    let data = ["business", "entertainment", "health", "science", "technology", "sports", "general"]
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -71,14 +61,34 @@ extension CategoriesViewController: UICollectionViewDelegateFlowLayout, UICollec
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CategoryCell
         cell.backgroundColor = .green
-        cell.data = self.data[indexPath.row]
+        cell.title.text = data[indexPath.row]
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("selected item in row \(indexPath.row)")
-        let nextView: ArticlesListViewController = ArticlesListViewController()
-        self.navigationController?.pushViewController(nextView, animated: true)
+        
+        let chosenCategory = data[indexPath.row]
+        
+        NetworkManager.shared.getArticles(category: chosenCategory){ result in
+            
+            switch result {
+            case let .success(articles):
+                
+                let nextView: ArticlesListViewController = ArticlesListViewController()
+                
+                nextView.articles = articles
+                nextView.category = self.data[indexPath.row]
+                
+                self.navigationController?.pushViewController(nextView, animated: true)
+                
+            case let .failure(error):
+                print(error)
+            }
+            print(result)
+            
+        }
+        
     }
     
 }

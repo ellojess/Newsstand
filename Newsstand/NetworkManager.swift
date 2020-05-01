@@ -12,47 +12,52 @@ import UIKit
 
 class NetworkManager {
     
+    public static let shared = NetworkManager()
     let urlSession = URLSession.shared
     let topArticlesURL = "https://newsapi.org/v2/top-headlines?country=us&apiKey=\(secretKey)"
     let baseURL = "https://newsapi.org/v2/"
     let APIKey = secretKey
     
     
-    func getArticles(_ completion: @escaping (Result<[Article]>) -> Void) {
-        let articlesRequest = makeRequest(for: .articles)
+    func getArticles(category: String, _ completion: @escaping (Result<[Article]>) -> Void) {
+        let articlesRequest = makeRequest(for: .category(category: category))
         print("\(articlesRequest)")
         let task = urlSession.dataTask(with: articlesRequest) { data, response, error in
-//        let url = URL(string: "\(baseURL)top-headlines?country=us&apiKey=\(secretKey)")
-//        let task = urlSession.dataTask(with: url!, completionHandler: { data, response, error in
+            //        let url = URL(string: "\(baseURL)top-headlines?country=us&apiKey=\(secretKey)")
+            //        let task = urlSession.dataTask(with: url!, completionHandler: { data, response, error in
             // Check for errors.
             if let error = error {
                 return completion(Result.failure(error))
             }
-
+            
             // Check to see if there is any data that was retrieved.
             guard let data = data else {
                 return completion(Result.failure(EndPointError.noData))
             }
-
+            
+            do{
+                let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
+                print(jsonObject)
+            } catch {
+                print(error.localizedDescription)
+            }
+            
             // Attempt to decode the data.
             guard let result = try? JSONDecoder().decode(ArticleList.self, from: data) else {
-
+                
                 return completion(Result.failure(EndPointError.couldNotParse))
             }
-
+            
             let articles = result.articles
-
+            
             // Return the result with the completion handler.
             DispatchQueue.main.async {
                 completion(Result.success(articles))
             }
         }
-
+        
         task.resume()
     }
-    
-    
-    
     
     private func makeRequest(for endPoint: EndPoints) -> URLRequest {
         // grab the parameters from the endpoint and convert them into a string
@@ -61,6 +66,7 @@ class NetworkManager {
         let path = endPoint.getPath()
         // create the full url from the above variables
         let fullURL = URL(string: baseURL.appending("\(path)?\(stringParams)"))!
+        print(fullURL)
         // build the request
         var request = URLRequest(url: fullURL)
         request.httpMethod = endPoint.getHTTPMethod()
@@ -71,11 +77,12 @@ class NetworkManager {
     
     enum EndPoints {
         case articles
+        case category(category: String)
         
         // determine which path to provide for the API request
         func getPath() -> String {
             switch self {
-            case .articles:
+            case .category, .articles:
                 return "top-headlines"
             }
         }
@@ -101,10 +108,13 @@ class NetworkManager {
             case .articles:
                 return [
                     "country": "us",
-//                    "category": "entertainment"
-//                    "category": "category"
                 ]
                 
+            case .category(let category):
+                return [
+                    "country": "us",
+                    "category": category
+                ]
             }
         }
         
@@ -113,7 +123,6 @@ class NetworkManager {
             let parameterArray = getParams().map { key, value in
                 return "\(key)=\(value)"
             }
-            
             return parameterArray.joined(separator: "&")
         }
         

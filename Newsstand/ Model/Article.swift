@@ -9,15 +9,20 @@
 import Foundation
 
 public struct Article: Codable {
+    let source: Source
     let author: String?
     let title: String?
     let description: String?
-    let url: URL? // Direct URL to article
-    let urlToImage: URL? //URL to image for the article
+    let url: String? // Direct URL to article
+    let urlToImage: String?
     let content: String?
 }
 
-public struct ArticleList: Codable{
+public struct ArticleList: Codable {
     public var articles: [Article]
 }
 
+struct Source: Codable {
+    public let id: String?
+    public let name: String?
+}
