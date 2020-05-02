@@ -27,19 +27,41 @@ class ArticleCell: UITableViewCell {
         return stackView
     }()
     
+    var articleImage: UIImageView = {
+        var articleImage = UIImageView()
+//        articleImage.translatesAutoresizingMaskIntoConstraints = false
+//        articleImage.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        
+        
+        return articleImage
+    }()
+    
     let title: UILabel = {
         let title = UILabel()
-        title.translatesAutoresizingMaskIntoConstraints = false
+        title.translatesAutoresizingMaskIntoConstraints = true
+        title.numberOfLines = 0
+        title.adjustsFontSizeToFitWidth = true
+        title.lineBreakMode = .byWordWrapping
+
         title.textColor = .black
         title.font = K.titleFont
-        title.lineBreakMode = .byWordWrapping
-        title.numberOfLines = 0
         return title
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        setUpStackView()
+        setUpImage()
+        setUpTitle()
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setUpStackView() {
         contentView.addSubview(stackView)
         
         stackView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.85).isActive = true
@@ -48,11 +70,23 @@ class ArticleCell: UITableViewCell {
         stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         
         stackView.addArrangedSubview(title)
-        
+        stackView.addArrangedSubview(articleImage)
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func setUpImage() {
+        articleImage.translatesAutoresizingMaskIntoConstraints = false
+        articleImage.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        articleImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12).isActive = true
+        articleImage.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        articleImage.widthAnchor.constraint(equalTo: articleImage.heightAnchor, multiplier: 16/9).isActive = true
+    }
+    
+    func setUpTitle() {
+        title.translatesAutoresizingMaskIntoConstraints = false
+        title.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        title.leadingAnchor.constraint(equalTo: articleImage.trailingAnchor, constant: 20).isActive = true
+        title.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        title.trailingAnchor.constraint(equalTo: trailingAnchor, constant:  -13).isActive = true
     }
     
 }

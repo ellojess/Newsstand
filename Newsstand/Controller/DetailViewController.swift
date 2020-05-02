@@ -26,11 +26,11 @@ class DetailViewController: UIViewController, WKUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .systemPink
-        setupUI()
+        setupView()
         openWeb(from: url!)
     }
     
-    func setupUI() {
+    func setupView() {
         self.view.backgroundColor = .white
         self.view.addSubview(webView)
         

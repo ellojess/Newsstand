@@ -13,42 +13,21 @@ class ArticlesListViewController: UIViewController{
     
     let tableView = UITableView()
     
-//    let articles: [Article] = []
-    
     let networkManager = NetworkManager()
     
-    var category: String? = nil 
-    
+    var category: String? = nil
+
     var articles: [Article] = [] {
         didSet {
             tableView.reloadData()
         }
     }
     
-//    let dummyData = [
-//        Article(title: "One"),
-//        Article(title: "Two"),
-//        Article(title: "Three")
-//    ]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTableView()
         tableView.register(ArticleCell.self, forCellReuseIdentifier: "cell")
-//        updateArticles()
     }
-    
-//    func updateArticles() {
-//        networkManager.getArticles(category: ) { result in
-//            switch result {
-//            case let .success(articles):
-//                self.articles = articles
-//            case let .failure(error):
-//                print(error)
-//            }
-//            print(result)
-//        }
-//    }
     
     func setUpTableView(){
         view.addSubview(tableView)
@@ -58,6 +37,7 @@ class ArticlesListViewController: UIViewController{
         tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         tableView.backgroundColor = UIColor(red:1.0, green:1.0, blue:0.95, alpha:1.0)
+        tableView.rowHeight = 100
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -73,14 +53,8 @@ extension ArticlesListViewController: UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ArticleCell
-//        cell.data = self.dummyData[indexPath.row]
-        
-        // retrieve from actual articles, and not mock data
         let article = articles[indexPath.row]
-        
-        
         cell.textLabel?.text = articles[indexPath.row].title
-        
         return cell
     }
     
@@ -91,7 +65,6 @@ extension ArticlesListViewController: UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("selected item in row \(indexPath.row)")
         let nextView: DetailViewController = DetailViewController()
-//        nextView.title = self.dummyData[indexPath.row].title
         nextView.url = articles[indexPath.row].url
         nextView.title = self.articles[indexPath.row].title
         self.navigationController?.pushViewController(nextView, animated: true)
