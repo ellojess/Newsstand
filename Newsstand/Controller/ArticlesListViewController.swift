@@ -55,6 +55,7 @@ extension ArticlesListViewController: UITableViewDataSource, UITableViewDelegate
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ArticleCell
         let article = articles[indexPath.row]
         cell.textLabel?.text = articles[indexPath.row].title
+        cell.getImage(article: articles[indexPath.row])
         return cell
     }
     

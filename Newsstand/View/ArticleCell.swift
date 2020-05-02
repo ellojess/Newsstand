@@ -82,6 +82,21 @@ class ArticleCell: UITableViewCell {
         articleImage.widthAnchor.constraint(equalTo: articleImage.heightAnchor, multiplier: 16/9).isActive = true
     }
     
+    func getImage(article: Article) {
+        if let imageURL = article.urlToImage {
+        articleImage.kf.setImage(with: URL(string: imageURL)) { result in
+            switch result {
+            case .success(let value):
+                print(value.image)
+                print(value.cacheType)
+                print(value.source)
+            case .failure(let error):
+                print(error)
+            }
+            }
+        }
+    }
+    
     func setUpTitle() {
         title.translatesAutoresizingMaskIntoConstraints = false
         title.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
@@ -89,5 +104,6 @@ class ArticleCell: UITableViewCell {
         title.heightAnchor.constraint(equalToConstant: 80).isActive = true
         title.trailingAnchor.constraint(equalTo: trailingAnchor, constant:  -13).isActive = true
     }
+   
     
 }
