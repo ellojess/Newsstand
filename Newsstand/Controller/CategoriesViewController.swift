@@ -11,7 +11,7 @@ import UIKit
 
 class CategoriesViewController: UIViewController {
     
-    let data = ["business", "entertainment", "health", "science", "technology", "sports", "general"]
+    let data = ["Business", "Entertainment", "Health", "Science", "Technology", "Sports", "General"]
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()

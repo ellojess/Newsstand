@@ -27,6 +27,7 @@ class ArticlesListViewController: UIViewController{
         super.viewDidLoad()
         setUpTableView()
         tableView.register(ArticleCell.self, forCellReuseIdentifier: "cell")
+        title = category!
     }
     
     func setUpTableView(){
@@ -53,7 +54,7 @@ extension ArticlesListViewController: UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ArticleCell
         let article = articles[indexPath.row]
-        cell.textLabel?.text = articles[indexPath.row].title
+//        cell.textLabel?.text = articles[indexPath.row].title
         cell.getImage(article: articles[indexPath.row])
         return cell
     }
