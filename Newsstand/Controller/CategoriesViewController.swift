@@ -51,7 +51,21 @@ class CategoriesViewController: UIViewController {
 extension CategoriesViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width/2.2, height: collectionView.frame.height/3)
+
+        let spaceBetweenCell :CGFloat = 0
+        let screenWidth = UIScreen.main.bounds.size.width - CGFloat(2 * spaceBetweenCell)
+        let totalSpace = spaceBetweenCell * 1.0
+        
+        if indexPath.row == data.count-1 { // change view for last cell if odd number of cells
+            
+            if data.count % 2  == 1 { // check if last cell is odd
+                return CGSize(width: collectionView.frame.width, height: (collectionView.frame.height-totalSpace)/4) // all Width and same previous height
+            } else {
+                return CGSize(width: (collectionView.frame.width-totalSpace)/2.2, height: (collectionView.frame.height-totalSpace)/3)
+            }
+        } else {
+            return CGSize(width: (collectionView.frame.width-totalSpace)/2.2, height: (collectionView.frame.height-totalSpace)/3)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
