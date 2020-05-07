@@ -19,19 +19,8 @@ class ArticleCell: UITableViewCell {
         }
     }
     
-    let stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 10
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.distribution = .fill
-        return stackView
-    }()
-    
     var articleImage: UIImageView = {
         var articleImage = UIImageView()
-//        articleImage.translatesAutoresizingMaskIntoConstraints = false
-//        articleImage.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         articleImage.layer.cornerRadius = 10
         articleImage.clipsToBounds = true
         
@@ -43,7 +32,6 @@ class ArticleCell: UITableViewCell {
         title.lineBreakMode = NSLineBreakMode.byWordWrapping
         title.numberOfLines = 0
         title.adjustsFontSizeToFitWidth = true
-//        title.lineBreakMode = .byWordWrapping
 
         title.textColor = .black
         title.font = K.titleFont
@@ -52,7 +40,7 @@ class ArticleCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+        title.translatesAutoresizingMaskIntoConstraints = false
         addSubview(articleImage)
         addSubview(title)
         setUpImage()
@@ -90,9 +78,11 @@ class ArticleCell: UITableViewCell {
     func setUpTitle() {
         title.translatesAutoresizingMaskIntoConstraints = false
         title.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        title.leadingAnchor.constraint(equalTo: articleImage.trailingAnchor, constant: 20).isActive = true
+        title.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 200).isActive = true
         title.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        title.trailingAnchor.constraint(equalTo: trailingAnchor, constant:  -450).isActive = true
+//        title.trailingAnchor.constraint(equalTo: articleImage.leadingAnchor, constant: 800).isActive = true
+        title.trailingAnchor.constraint(equalTo: self.articleImage.leadingAnchor).isActive = true
+//        title.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 200).isActive = true
     }
    
     

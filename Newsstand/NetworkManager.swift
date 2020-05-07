@@ -14,7 +14,6 @@ class NetworkManager {
     
     public static let shared = NetworkManager()
     let urlSession = URLSession.shared
-    let topArticlesURL = "https://newsapi.org/v2/top-headlines?country=us&apiKey=\(secretKey)"
     let baseURL = "https://newsapi.org/v2/"
     let APIKey = secretKey
     
@@ -23,8 +22,6 @@ class NetworkManager {
         let articlesRequest = makeRequest(for: .category(category: category))
         print("\(articlesRequest)")
         let task = urlSession.dataTask(with: articlesRequest) { data, response, error in
-            //        let url = URL(string: "\(baseURL)top-headlines?country=us&apiKey=\(secretKey)")
-            //        let task = urlSession.dataTask(with: url!, completionHandler: { data, response, error in
             // Check for errors.
             if let error = error {
                 return completion(Result.failure(error))
