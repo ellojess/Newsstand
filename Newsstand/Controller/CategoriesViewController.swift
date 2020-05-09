@@ -12,6 +12,16 @@ import UIKit
 class CategoriesViewController: UIViewController {
     
     let data = ["Business", "Entertainment", "Health", "Science", "Technology", "Sports", "General"]
+    let images = ["business", "entertainment", "health", "science", "technology", "sports", "general"]
+//    let data: [Category]= [
+//        Category(title: "Business", image: UIImage(named: "business")!),
+//        Category(title: "Entertainment", image: UIImage(named: "entertainment")!),
+//        Category(title: "Health", image: UIImage(named: "health")!),
+//        Category(title: "Science", image: UIImage(named: "science")!),
+//        Category(title: "Technology", image: UIImage(named: "technology")!),
+//        Category(title: "Sports", image: UIImage(named: "sports")!),
+//        Category(title: "General", image: UIImage(named: "general")!)
+//    ]
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -76,6 +86,7 @@ extension CategoriesViewController: UICollectionViewDelegateFlowLayout, UICollec
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CategoryCell
         cell.backgroundColor = .green
         cell.title.text = data[indexPath.row]
+        cell.categoryImage.image = UIImage(named: "\(images[indexPath.row])")
         return cell
     }
     

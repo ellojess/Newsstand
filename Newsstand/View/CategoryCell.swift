@@ -15,15 +15,16 @@ class CategoryCell: UICollectionViewCell {
         didSet {
             guard let data = data else { return }
             title.text = data.title
+            categoryImage.image = data.image
         }
     }
     
     let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 20
+//        stackView.spacing = 20
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.distribution = .fill
+        stackView.distribution = .fillEqually
         return stackView
     }()
     
@@ -36,19 +37,35 @@ class CategoryCell: UICollectionViewCell {
         return title
     }()
     
+    let categoryImage: UIImageView = {
+        let image = UIImageView()
+        image.clipsToBounds = true
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = UIView.ContentMode.scaleAspectFit
+        return image
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
+
         contentView.addSubview(stackView)
-        
-        stackView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.80).isActive = true
-        stackView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.70).isActive = true
-        stackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        
-        stackView.addArrangedSubview(title)
+        setUpStackView()
+        contentView.addSubview(categoryImage)
+        contentView.addSubview(title)
+
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func setUpStackView() {
+        stackView.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
+        stackView.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
+        stackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+    }
+    
+    
+    
 }
