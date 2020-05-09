@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import QuartzCore
 
 class CategoryCell: UICollectionViewCell {
     
@@ -48,8 +49,14 @@ class CategoryCell: UICollectionViewCell {
         super.init(frame: .zero)
         contentView.addSubview(stackView)
         setUpStackView()
-        stackView.addArrangedSubview(title)
         
+        title.layer.shadowOffset = CGSize(width: 6, height: 5)
+        title.layer.shadowOpacity = 3.7
+        title.layer.shadowRadius = 5
+//        title.layer.shadowColor = CGColor.init(srgbRed: 1, green: 0, blue: 0, alpha: 1)
+        title.layer.shadowColor = UIColor.black.cgColor
+        
+        stackView.addArrangedSubview(title)
     }
     
     required init?(coder: NSCoder) {
