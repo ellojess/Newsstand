@@ -32,6 +32,10 @@ class CategoryCell: UICollectionViewCell {
         let title = UILabel()
         title.translatesAutoresizingMaskIntoConstraints = false
         title.textColor = .white
+        title.layer.shadowOffset = CGSize(width: 6, height: 5)
+        title.layer.shadowOpacity = 3.7
+        title.layer.shadowRadius = 5
+        title.layer.shadowColor = UIColor.black.cgColor
         title.font = K.headingFont
         title.textAlignment = .center
         return title
@@ -49,13 +53,6 @@ class CategoryCell: UICollectionViewCell {
         super.init(frame: .zero)
         contentView.addSubview(stackView)
         setUpStackView()
-        
-        title.layer.shadowOffset = CGSize(width: 6, height: 5)
-        title.layer.shadowOpacity = 3.7
-        title.layer.shadowRadius = 5
-//        title.layer.shadowColor = CGColor.init(srgbRed: 1, green: 0, blue: 0, alpha: 1)
-        title.layer.shadowColor = UIColor.black.cgColor
-        
         stackView.addArrangedSubview(title)
     }
     
