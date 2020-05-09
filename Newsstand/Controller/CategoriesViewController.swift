@@ -52,10 +52,23 @@ class CategoriesViewController: UIViewController {
 
 extension CategoriesViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return data.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.5
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
+        
         let spaceBetweenCell :CGFloat = 0
         let totalSpace = spaceBetweenCell * 1.0
+        
         
         if indexPath.row == data.count-1 { // change view for last cell if odd number of cells
             
@@ -67,22 +80,14 @@ extension CategoriesViewController: UICollectionViewDelegateFlowLayout, UICollec
         } else {
             return CGSize(width: (collectionView.frame.width-totalSpace)/2.1, height: (collectionView.frame.height-totalSpace)/3)
         }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CategoryCell
-//        cell.backgroundColor = .green
         cell.backgroundView = UIImageView(image: (UIImage(named: "\(images[indexPath.row])")))
         cell.title.text = data[indexPath.row]
-
+        
         return cell
     }
     
@@ -109,7 +114,8 @@ extension CategoriesViewController: UICollectionViewDelegateFlowLayout, UICollec
             print(result)
             
         }
-
+        
     }
     
 }
+

@@ -22,7 +22,6 @@ class CategoryCell: UICollectionViewCell {
     let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-//        stackView.spacing = 20
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.distribution = .fillEqually
         return stackView
@@ -47,11 +46,10 @@ class CategoryCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-
         contentView.addSubview(stackView)
         setUpStackView()
         stackView.addArrangedSubview(title)
-
+        
     }
     
     required init?(coder: NSCoder) {
@@ -65,6 +63,6 @@ class CategoryCell: UICollectionViewCell {
         stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     }
     
-    
-    
 }
+
+
