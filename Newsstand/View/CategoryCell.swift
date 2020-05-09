@@ -50,8 +50,7 @@ class CategoryCell: UICollectionViewCell {
 
         contentView.addSubview(stackView)
         setUpStackView()
-        contentView.addSubview(categoryImage)
-        contentView.addSubview(title)
+        stackView.addArrangedSubview(title)
 
     }
     

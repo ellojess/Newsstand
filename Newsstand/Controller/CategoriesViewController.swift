@@ -13,19 +13,11 @@ class CategoriesViewController: UIViewController {
     
     let data = ["Business", "Entertainment", "Health", "Science", "Technology", "Sports", "General"]
     let images = ["business", "entertainment", "health", "science", "technology", "sports", "general"]
-//    let data: [Category]= [
-//        Category(title: "Business", image: UIImage(named: "business")!),
-//        Category(title: "Entertainment", image: UIImage(named: "entertainment")!),
-//        Category(title: "Health", image: UIImage(named: "health")!),
-//        Category(title: "Science", image: UIImage(named: "science")!),
-//        Category(title: "Technology", image: UIImage(named: "technology")!),
-//        Category(title: "Sports", image: UIImage(named: "sports")!),
-//        Category(title: "General", image: UIImage(named: "general")!)
-//    ]
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 30
+        layout.minimumLineSpacing = 2
+        layout.minimumInteritemSpacing = 2
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -63,7 +55,6 @@ extension CategoriesViewController: UICollectionViewDelegateFlowLayout, UICollec
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
         let spaceBetweenCell :CGFloat = 0
-        let screenWidth = UIScreen.main.bounds.size.width - CGFloat(2 * spaceBetweenCell)
         let totalSpace = spaceBetweenCell * 1.0
         
         if indexPath.row == data.count-1 { // change view for last cell if odd number of cells
@@ -74,7 +65,7 @@ extension CategoriesViewController: UICollectionViewDelegateFlowLayout, UICollec
                 return CGSize(width: (collectionView.frame.width-totalSpace)/2.2, height: (collectionView.frame.height-totalSpace)/3)
             }
         } else {
-            return CGSize(width: (collectionView.frame.width-totalSpace)/2.2, height: (collectionView.frame.height-totalSpace)/3)
+            return CGSize(width: (collectionView.frame.width-totalSpace)/2.1, height: (collectionView.frame.height-totalSpace)/3)
         }
     }
     
@@ -82,11 +73,16 @@ extension CategoriesViewController: UICollectionViewDelegateFlowLayout, UICollec
         return data.count
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CategoryCell
-        cell.backgroundColor = .green
+//        cell.backgroundColor = .green
+        cell.backgroundView = UIImageView(image: (UIImage(named: "\(images[indexPath.row])")))
         cell.title.text = data[indexPath.row]
-        cell.categoryImage.image = UIImage(named: "\(images[indexPath.row])")
+
         return cell
     }
     
@@ -113,7 +109,7 @@ extension CategoriesViewController: UICollectionViewDelegateFlowLayout, UICollec
             print(result)
             
         }
-        
+
     }
     
 }
