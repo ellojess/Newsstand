@@ -2,6 +2,8 @@
 
 Newsstand is an iOS app that fetches top articles from recent news and displays them as clickable items that will take you to the full story.
 
+![](newsstandviews.png)
+
 ## Getting Started
 
 Note: Newsstand is still in the process of developmemt.
