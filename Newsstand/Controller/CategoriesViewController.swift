@@ -16,10 +16,15 @@ class CategoriesViewController: UIViewController {
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 2
-        layout.minimumInteritemSpacing = 2
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        layout.headerReferenceSize = .zero
+        layout.sectionInset = .zero
+        
+        
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        //        let collectionView = UICollectionView(frame: .zero)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: "cell")
         
@@ -38,10 +43,13 @@ class CategoriesViewController: UIViewController {
         collectionView.heightAnchor.constraint(equalTo: self.view.layoutMarginsGuide.heightAnchor, multiplier: 1.0).isActive = true
         collectionView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         collectionView.centerYAnchor.constraint(equalTo: self.view.layoutMarginsGuide.centerYAnchor).isActive = true
+        
+        collectionView.contentInset = .zero
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.title = "Newsstand"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
     }
@@ -56,31 +64,29 @@ extension CategoriesViewController: UICollectionViewDelegateFlowLayout, UICollec
         return data.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 2
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0.5
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let spaceBetweenCell :CGFloat = 0
+        let spaceBetweenCell :CGFloat = 1.0
         let totalSpace = spaceBetweenCell * 1.0
-        
         
         if indexPath.row == data.count-1 { // change view for last cell if odd number of cells
             
             if data.count % 2  == 1 { // check if last cell is odd
-                return CGSize(width: collectionView.frame.width, height: (collectionView.frame.height-totalSpace)/4) // all Width and same previous height
+                return CGSize(width: collectionView.frame.width, height: (collectionView.frame.height-totalSpace)/3.8) // all Width and same previous height
             } else {
-                return CGSize(width: (collectionView.frame.width-totalSpace)/2.2, height: (collectionView.frame.height-totalSpace)/3)
+                return CGSize(width: (collectionView.frame.width-totalSpace)/2.1, height: (collectionView.frame.height-totalSpace)/3)
             }
         } else {
-            return CGSize(width: (collectionView.frame.width-totalSpace)/2.1, height: (collectionView.frame.height-totalSpace)/3)
+            return CGSize(width: (collectionView.frame.width-totalSpace)/2, height: (collectionView.frame.height-totalSpace)/3)
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
