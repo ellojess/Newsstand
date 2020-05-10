@@ -16,7 +16,7 @@ class ArticlesListViewController: UIViewController{
     let networkManager = NetworkManager()
     
     var category: String? = nil
-
+    
     var articles: [Article] = [] {
         didSet {
             tableView.reloadData()
@@ -29,6 +29,12 @@ class ArticlesListViewController: UIViewController{
         tableView.register(ArticleCell.self, forCellReuseIdentifier: "cell")
         title = category!
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     
     func setUpTableView(){
         view.addSubview(tableView)
@@ -53,8 +59,6 @@ extension ArticlesListViewController: UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ArticleCell
-        let article = articles[indexPath.row]
-//        cell.textLabel?.text = articles[indexPath.row].title
         cell.getImage(article: articles[indexPath.row])
         return cell
     }

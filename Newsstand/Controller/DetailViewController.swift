@@ -30,6 +30,12 @@ class DetailViewController: UIViewController, WKUIDelegate {
         openWeb(from: url!)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    
     func setupView() {
         self.view.backgroundColor = .white
         self.view.addSubview(webView)

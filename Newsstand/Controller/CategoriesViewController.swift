@@ -46,6 +46,11 @@ class CategoriesViewController: UIViewController {
         collectionView.register(UICollectionViewCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerCellId")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
     func setViews(){
         self.view.backgroundColor = UIColor.black
         self.view.addSubview(collectionView)
@@ -58,8 +63,6 @@ class CategoriesViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        self.navigationController?.navigationBar.isHidden = true
-        self.navigationController?.title = "Newsstand"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
     }
