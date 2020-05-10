@@ -21,19 +21,29 @@ class CategoriesViewController: UIViewController {
         layout.headerReferenceSize = .zero
         layout.sectionInset = .zero
         
-        
-        
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        //        let collectionView = UICollectionView(frame: .zero)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: "cell")
         
         return collectionView
     }()
     
+    lazy var searchBar : UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.placeholder = "Search..."
+        searchBar.tintColor = .white
+        searchBar.searchTextField.textColor = UIColor.white
+        searchBar.barTintColor = .black
+        searchBar.barStyle = .default
+        searchBar.sizeToFit()
+        return searchBar
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setViews()
+        // register header view
+        collectionView.register(UICollectionViewCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerCellId")
     }
     
     func setViews(){
@@ -52,6 +62,23 @@ class CategoriesViewController: UIViewController {
         self.navigationController?.title = "Newsstand"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
+    }
+    
+    // define height of header
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: view.frame.width, height: 40)
+    }
+    
+    //add search bar to UICollectionview header
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerCellId", for: indexPath)
+        header.addSubview(searchBar)
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.leftAnchor.constraint(equalTo: header.leftAnchor).isActive = true
+        searchBar.rightAnchor.constraint(equalTo: header.rightAnchor).isActive = true
+        searchBar.topAnchor.constraint(equalTo: header.topAnchor).isActive = true
+        searchBar.bottomAnchor.constraint(equalTo: header.bottomAnchor).isActive = true
+        return header
     }
     
 }

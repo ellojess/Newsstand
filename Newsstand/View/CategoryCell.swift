@@ -36,7 +36,7 @@ class CategoryCell: UICollectionViewCell {
         title.layer.shadowOpacity = 3.7
         title.layer.shadowRadius = 5
         title.layer.shadowColor = UIColor.black.cgColor
-        title.font = K.headingFont
+        title.font = K.categoryFont
         title.textAlignment = .center
         return title
     }()
