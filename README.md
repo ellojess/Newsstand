@@ -7,7 +7,8 @@ Newsstand is an iOS app that fetches top articles from recent news and displays 
 ### Home Screen
 Choose the category of news you would like to read more from in Newsstands scrollview
 
-<img src="previewscreens/homescreentop.png" width="300">  <img src="previewscreens/homescreenbottom.png" width="300">
+<img src="previewscreens/homescreentop.png" width="300">  
+<img src="previewscreens/homescreenbottom.png" width="300">
 
 ### Articles Screen 
 See the top trending articles from the category of your choice 
