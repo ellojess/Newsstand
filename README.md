@@ -19,7 +19,7 @@ See the top trending articles from the category of your choice
 
 Read the article of your choice in the web view without ever having to leave the app! Be able to save your article to read later or share it to your friends, families, and others!
 
-<img src="previewscreens/detailscreen1.png" width="300"> <img src="previewscreens/detailscreen2.png" width="300">
+<img src="previewscreens/detailscreen1.png" width="300">
 
 ## Getting Started
 
